@@ -25,6 +25,7 @@ export const colors = {
     background4: '#61bdb8',
     background5: '#36827e'
 };
+//**END VARIABLES**/
 
 
 
