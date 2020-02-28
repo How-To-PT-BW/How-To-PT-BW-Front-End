@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 import styled from "styled-components";
 import { colors, devices } from "../styledComponents/variables";
-import {useForm} from 'react-hook-form';
-import {H2} from '../styledComponents/fontStyles';
-import DraftArticleLogo from '../images/DraftArticleLogo.png';
+import { useForm } from "react-hook-form";
+import { H2 } from "../styledComponents/fontStyles";
+import DraftArticleLogo from "../images/DraftArticleLogo.png";
 
 const Container = styled.div`
   background-color: ${colors.background3};
@@ -22,26 +22,27 @@ const Container = styled.div`
   }
 `;
 
-const Header = styled.div`
-display: flex;
-justify-content: center;
-align-items:center;
-padding: 30px;
-` 
+const DraftHeader = styled.div`
+  background-image: url(${DraftArticleLogo});
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+`;
 
 function SignUpForm() {
-
-const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = data => {
     console.log(data);
   }; // your form submit function which will invoke after successful validation
 
-
   return (
     <Container>
-      <Header>
-        <H2>Sign Up</H2>
-      </Header>
+      <DraftHeader>
+        <H2>Draft an Article</H2>
+      </DraftHeader>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>Example</label>
         <input name="example" defaultValue="test" ref={register} />
@@ -55,6 +56,6 @@ const { register, handleSubmit, watch, errors } = useForm();
       </form>
     </Container>
   );
-};
+}
 
 export default SignUpForm;
