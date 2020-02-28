@@ -10,6 +10,8 @@ export const devices = {
     desktop: `(min-width: ${size.desktop})`
 };
 
+
+//**FONT AND BACKGROUND COLORS**/
 export const colors = {
     primary: '#FDBA77',
     text1:'#E6EDF4',
