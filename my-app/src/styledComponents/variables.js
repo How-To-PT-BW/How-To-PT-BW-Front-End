@@ -18,10 +18,10 @@ export const colors = {
     text4: '#4989ae',
     text5: '#2a4565',
     background1: '#ffffff',
-    background2: 'f1f9f9',
-    background3: 'a8dbd8',
-    background4: '61bdb8',
-    background5: '36827e'
+    background2: '#f1f9f9',
+    background3: '#a8dbd8',
+    background4: '#61bdb8',
+    background5: '#36827e'
 };
 
 
