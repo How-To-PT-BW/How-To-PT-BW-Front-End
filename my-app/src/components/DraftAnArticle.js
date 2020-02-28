@@ -32,7 +32,7 @@ const DraftHeader = styled.div`
   padding: 50px;
 `;
 
-function SignUpForm() {
+function DraftForm() {
   const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = data => {
     console.log(data);
@@ -58,4 +58,4 @@ function SignUpForm() {
   );
 }
 
-export default SignUpForm;
+export default DraftForm;
