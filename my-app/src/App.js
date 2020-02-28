@@ -5,6 +5,8 @@ import LoginForm from './components/Login';
 import SignUpForm from './components/Signup';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import ProtectedRoute from './components/ProtectedRoute';
+import DraftForm from './components/DraftAnArticle';
+
 
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
         <Switch>
           <Route path="/login" component={LoginForm} />
           <Route path="/signup" component={SignUpForm} />
+          <ProtectedRoute exact path="/draft" component={DraftForm} />
         </Switch>
       </div>
     </Router>
