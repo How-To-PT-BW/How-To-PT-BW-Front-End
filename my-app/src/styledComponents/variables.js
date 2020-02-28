@@ -4,7 +4,7 @@ const size = {
     tablet: '800px',
     desktop: '1000px'
 }
-export const device = {
+export const devices = {
     mobile: `(min-width: ${size.mobile})`,
     tablet: `(min-width: ${size.tablet})`,
     desktop: `(min-width: ${size.desktop})`
@@ -23,4 +23,6 @@ export const colors = {
     background4: '61bdb8',
     background5: '36827e'
 };
+
+
 
