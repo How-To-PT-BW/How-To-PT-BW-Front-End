@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import { colors, devices } from "../styledComponents/variables";
 import {useForm} from 'react-hook-form';
-import {H2, FormLabel} from '../styledComponents/fontStyles';
+import {H2, FormLabel, FormRadioLabel} from '../styledComponents/fontStyles';
 import DraftArticleLogo from '../images/DraftArticleLogo.png';
 
 const Container = styled.div`
@@ -34,13 +34,44 @@ const FormInputGroup = styled.div`
     flex-direction:column;
     align-items: center;
     margin-bottom: 20px;
+    width: 100%;
 `
+const FormRowGroup = styled.div`
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    border: 1px solid red;
+    margin: 5px;
+`
+const FormRadioInput = styled.input`
+    width: 75%;
+    border-radius: 16px;
+    border: 1px solid ${colors.background5};
+    height: 40px;
+    width: 40px;
+    font-size: 22px;
+    font-family: "Martel";
+    font-weight: 600;
+`
+
+
 
 const FormInput = styled.input`
     width: 75%;
     border-radius: 16px;
     border: none;
     height: 48px;
+    font-size: 22px;
+    font-family: "Martel";
+    font-weight: 600;
+`
+const FormBioInput = styled.input`
+    width: 343px;
+    height: 192px;
+    border-radius: 16px;
+    border: none;
     font-size: 22px;
     font-family: "Martel";
     font-weight: 600;
@@ -82,16 +113,72 @@ const { register, handleSubmit, watch, errors } = useForm();
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormInputGroup>
           <FormLabel>Username</FormLabel>
-          <FormInput name="example" ref={register} placeholder="placeholderrrr"/>
+          <FormInput name="username" ref={register} placeholder="placeholderrrr"/>
         </FormInputGroup>
         <FormInputGroup>
           <FormLabel>Password</FormLabel>
           <FormInput
-            name="exampleRequired"
+            name="password"
             type="password"
             ref={register({ required: true, maxLength: 10 })}
           />
         </FormInputGroup>
+        <FormLabel>Account Type</FormLabel>
+        
+        <FormRowGroup>
+          <FormRadioInput
+          name="account-type"
+          type="radio"
+          id="lurker"
+          />
+          <FormLabel for="lurker">Lurker</FormLabel>
+        </FormRowGroup>
+        <FormRowGroup>
+          <FormRadioInput
+          name="account-type"
+          type="radio"
+          id="Contributor"
+          />
+          <FormLabel for="contributor">Contributor</FormLabel>
+        </FormRowGroup>
+        <FormInputGroup>
+            <FormLabel>Email Address</FormLabel>
+            <FormInput
+            name="email"
+            type="email"
+            />
+        </FormInputGroup>
+        <FormInputGroup>
+          <FormRowGroup>
+            <FormLabel>Auto</FormLabel>
+            <FormInput type="checkbox" name="auto"/>
+          </FormRowGroup>
+          <FormRowGroup>
+            <FormLabel>Computers</FormLabel>
+            <FormInput type="checkbox" name="computers"/>
+          </FormRowGroup>
+          <FormRowGroup>
+            <FormLabel>Food</FormLabel>
+            <FormInput type="checkbox" name="food"/>
+          </FormRowGroup>
+          <FormRowGroup>
+            <FormLabel>Hobbies</FormLabel>
+            <FormInput type="checkbox" name="hobbies"/>
+          </FormRowGroup>
+          <FormRowGroup>
+            <FormLabel>Home and Garden</FormLabel>
+            <FormInput type="checkbox" name="homeandgarden"/>
+          </FormRowGroup>
+          <FormRowGroup>
+            <FormLabel>Travel</FormLabel>
+            <FormInput type="checkbox" name="travel"/>
+          </FormRowGroup>
+        </FormInputGroup>
+        <FormInputGroup>
+          <FormLabel>Profile Bio</FormLabel>
+          <FormBioInput type="text" placeholder="Write something about you"/>
+        </FormInputGroup>
+        
         {errors.exampleRequired && <p>This field is required</p>}
         <FormSubmit type="submit" value="Submit"/>
       </Form>
