@@ -16,3 +16,11 @@ export const FormLabel = styled.label`
     font-weight: 600;
     color: ${colors.text5};
 `;
+
+export const FormRadioLabel = styled.label`
+    font-family: "Martel";
+    font-size: 22px;
+    line-height: 32px;
+    font-weight: 600;
+    color: ${colors.text5};
+`;
