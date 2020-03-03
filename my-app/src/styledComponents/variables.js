@@ -23,7 +23,8 @@ export const colors = {
     background2: '#f1f9f9',
     background3: '#a8dbd8',
     background4: '#61bdb8',
-    background5: '#36827e'
+    background5: '#36827e',
+    background6: '#275E5B'
 };
 //**END VARIABLES**/
 
