@@ -127,17 +127,19 @@ const { register, handleSubmit, watch, errors } = useForm();
         
         <FormRowGroup>
           <FormRadioInput
-          name="account-type"
+          name="account-type-lurker"
           type="radio"
-          id="lurker"
+          id="Lurker"
+          ref={register}
           />
           <FormLabel for="lurker">Lurker</FormLabel>
         </FormRowGroup>
         <FormRowGroup>
           <FormRadioInput
-          name="account-type"
+          name="account-type-contributor"
           type="radio"
           id="Contributor"
+          ref={register}
           />
           <FormLabel for="contributor">Contributor</FormLabel>
         </FormRowGroup>
@@ -146,37 +148,38 @@ const { register, handleSubmit, watch, errors } = useForm();
             <FormInput
             name="email"
             type="email"
+            ref={register}
             />
         </FormInputGroup>
         <FormInputGroup>
           <FormRowGroup>
             <FormLabel>Auto</FormLabel>
-            <FormInput type="checkbox" name="auto"/>
+            <FormInput type="checkbox" name="auto" ref={register}/>
           </FormRowGroup>
           <FormRowGroup>
             <FormLabel>Computers</FormLabel>
-            <FormInput type="checkbox" name="computers"/>
+            <FormInput type="checkbox" name="computers" ref={register}/>
           </FormRowGroup>
           <FormRowGroup>
             <FormLabel>Food</FormLabel>
-            <FormInput type="checkbox" name="food"/>
+            <FormInput type="checkbox" name="food" ref={register}/>
           </FormRowGroup>
           <FormRowGroup>
             <FormLabel>Hobbies</FormLabel>
-            <FormInput type="checkbox" name="hobbies"/>
+            <FormInput type="checkbox" name="hobbies" ref={register}/>
           </FormRowGroup>
           <FormRowGroup>
             <FormLabel>Home and Garden</FormLabel>
-            <FormInput type="checkbox" name="homeandgarden"/>
+            <FormInput type="checkbox" name="homeandgarden" ref={register}/>
           </FormRowGroup>
           <FormRowGroup>
             <FormLabel>Travel</FormLabel>
-            <FormInput type="checkbox" name="travel"/>
+            <FormInput type="checkbox" name="travel" ref={register}/>
           </FormRowGroup>
         </FormInputGroup>
         <FormInputGroup>
           <FormLabel>Profile Bio</FormLabel>
-          <FormBioInput type="text" placeholder="Write something about you"/>
+          <FormBioInput type="text" name="bio" placeholder="Write something about you" ref={register}/>
         </FormInputGroup>
         
         {errors.exampleRequired && <p>This field is required</p>}

@@ -6,6 +6,7 @@ import SignUpForm from './components/Signup';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import ProtectedRoute from './components/ProtectedRoute';
 import DraftForm from './components/DraftAnArticle';
+import Welcome from './components/Welcome';
 
 
 
@@ -19,6 +20,7 @@ function App() {
       <div>
         <Switch>
           <Route path="/login" component={LoginForm} />
+          <Route path="/welcome" component={Welcome} />
           <Route path="/signup" component={SignUpForm} />
           <ProtectedRoute exact path="/draft" component={DraftForm} />
         </Switch>
