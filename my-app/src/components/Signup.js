@@ -5,11 +5,12 @@ import { colors, devices } from "../styledComponents/variables";
 import {useForm} from 'react-hook-form';
 import {H2, FormLabel, FormRadioLabel} from '../styledComponents/fontStyles';
 import DraftArticleLogo from '../images/DraftArticleLogo.png';
+import {axiosWithAuth} from '../utilities/axiosWithAuth';
 
 const Container = styled.div`
   background-color: ${colors.background3};
   fill: solid ${colors.background3};
-  border: 1px solid red;
+  margin: auto;
 
   @media ${devices.mobile} {
     max-width: 500px;
@@ -42,7 +43,6 @@ const FormRowGroup = styled.div`
     align-items: center;
     justify-content: space-around;
     width: 100%;
-    border: 1px solid red;
     margin: 5px;
 `
 const FormRadioInput = styled.input`
@@ -97,13 +97,22 @@ align-items:center;
 `
 
 
-function SignUpForm() {
-
-const { register, handleSubmit, watch, errors } = useForm();
+function SignUpForm(props) {
+  const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = data => {
     console.log(data);
+    axiosWithAuth()
+      .post("/users/register", data)
+      .then(res => {
+        console.log(res);
+        localStorage.setItem("token", res.data.token);
+        props.history.push("/draft");
+      })
+      .catch(err => {
+        localStorage.removeItem("token");
+        console.log("There was an error", err);
+      });
   }; // your form submit function which will invoke after successful validation
-
 
   return (
     <Container>
@@ -113,7 +122,11 @@ const { register, handleSubmit, watch, errors } = useForm();
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormInputGroup>
           <FormLabel>Username</FormLabel>
-          <FormInput name="username" ref={register} placeholder="placeholderrrr"/>
+          <FormInput
+            name="username"
+            ref={register}
+            placeholder="placeholderrrr"
+          />
         </FormInputGroup>
         <FormInputGroup>
           <FormLabel>Password</FormLabel>
@@ -124,66 +137,69 @@ const { register, handleSubmit, watch, errors } = useForm();
           />
         </FormInputGroup>
         <FormLabel>Account Type</FormLabel>
-        
+
         <FormRowGroup>
           <FormRadioInput
-          name="account-type-lurker"
-          type="radio"
-          id="Lurker"
-          ref={register}
+            name="allowPost"
+            type="radio"
+            id="lurker"
+            value="false"
+            ref={register}
           />
           <FormLabel for="lurker">Lurker</FormLabel>
         </FormRowGroup>
         <FormRowGroup>
           <FormRadioInput
-          name="account-type-contributor"
-          type="radio"
-          id="Contributor"
-          ref={register}
+            name="allowPost"
+            type="radio"
+            id="contributor"
+            value="true"
+            ref={register}
           />
           <FormLabel for="contributor">Contributor</FormLabel>
         </FormRowGroup>
         <FormInputGroup>
-            <FormLabel>Email Address</FormLabel>
-            <FormInput
-            name="email"
-            type="email"
-            ref={register}
-            />
+          <FormLabel>Email Address</FormLabel>
+          <FormInput name="email" type="email" ref={register} />
         </FormInputGroup>
-        <FormInputGroup>
+        {/*<FormInputGroup>
           <FormRowGroup>
             <FormLabel>Auto</FormLabel>
-            <FormInput type="checkbox" name="auto" ref={register}/>
+            <FormInput type="checkbox" name="auto" ref={register} />
           </FormRowGroup>
           <FormRowGroup>
             <FormLabel>Computers</FormLabel>
-            <FormInput type="checkbox" name="computers" ref={register}/>
+            <FormInput type="checkbox" name="computers" ref={register} />
           </FormRowGroup>
           <FormRowGroup>
             <FormLabel>Food</FormLabel>
-            <FormInput type="checkbox" name="food" ref={register}/>
+            <FormInput type="checkbox" name="food" ref={register} />
           </FormRowGroup>
           <FormRowGroup>
             <FormLabel>Hobbies</FormLabel>
-            <FormInput type="checkbox" name="hobbies" ref={register}/>
+            <FormInput type="checkbox" name="hobbies" ref={register} />
           </FormRowGroup>
           <FormRowGroup>
             <FormLabel>Home and Garden</FormLabel>
-            <FormInput type="checkbox" name="homeandgarden" ref={register}/>
+            <FormInput type="checkbox" name="homeandgarden" ref={register} />
           </FormRowGroup>
           <FormRowGroup>
             <FormLabel>Travel</FormLabel>
-            <FormInput type="checkbox" name="travel" ref={register}/>
+            <FormInput type="checkbox" name="travel" ref={register} />
           </FormRowGroup>
-        </FormInputGroup>
+        </FormInputGroup> */}
         <FormInputGroup>
           <FormLabel>Profile Bio</FormLabel>
-          <FormBioInput type="text" name="bio" placeholder="Write something about you" ref={register}/>
+          <FormBioInput
+            type="text"
+            name="bio"
+            placeholder="Write something about you"
+            ref={register}
+          />
         </FormInputGroup>
-        
+
         {errors.exampleRequired && <p>This field is required</p>}
-        <FormSubmit type="submit" value="Submit"/>
+        <FormSubmit type="submit" value="Submit" />
       </Form>
     </Container>
   );
