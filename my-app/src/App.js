@@ -20,7 +20,7 @@ function App() {
       <div>
         <Switch>
           <Route path="/login" component={LoginForm} />
-          <Route path="/welcome" component={Welcome} />
+          <Route exact path="/" component={Welcome} />
           <Route path="/signup" component={SignUpForm} />
           <ProtectedRoute exact path="/draft" component={DraftForm} />
         </Switch>
