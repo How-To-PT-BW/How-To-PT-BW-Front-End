@@ -7,6 +7,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import DraftForm from './components/DraftAnArticle';
 import TopBarBlock from './styledComponents/topbarblock';
 import Step from './components/Step';
+import Welcome from './components/Welcome';
+
 
 
 // staging
@@ -26,6 +28,7 @@ function App() {
       <div>
         <Switch>
           <Route path="/login" component={LoginForm} />
+          <Route path="/welcome" component={Welcome} />
           <Route path="/signup" component={SignUpForm} />
           <ProtectedRoute exact path="/draft" component={DraftForm} />
           <Route path="/DraftAnArticle" render={props => <DraftForm {...props}/>}/>
