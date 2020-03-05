@@ -11,7 +11,6 @@ import {axiosWithAuth} from '../utilities/axiosWithAuth';
 const Container = styled.div`
   background-color: ${colors.background3};
   fill: solid ${colors.background3};
-  border: 1px solid red;
 
   @media ${devices.mobile} {
     max-width: 500px;

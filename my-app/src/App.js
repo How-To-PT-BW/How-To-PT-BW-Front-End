@@ -8,18 +8,16 @@ import DraftForm from './components/DraftAnArticle';
 import TopBarBlock from './styledComponents/topbarblock';
 import Step from './components/Step';
 import Welcome from './components/Welcome';
-
-
+import ArticleList from './components/ArticleList';
+import HowTo from './components/HowTo'
 
 // staging
 
 function App() {
   const [steps,setSteps] = useState([])
   return (
-    
-    
     <Router>
-      <TopBarBlock/>
+      <TopBarBlock />
       <nav>
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>
@@ -29,14 +27,28 @@ function App() {
         <Switch>
           <Route path="/login" component={LoginForm} />
           <Route exact path="/" component={Welcome} />
-          <Route path="/signup" component={SignUpForm} />
+          <Route exact path="/articlelist" component={ArticleList} />
+          <Route exact path="/signup" component={SignUpForm} />
+          <Route 
+          path="/how-to/:id"
+          render={props=>{
+            return <HowTo {...props}/>
+          }}/>
           <ProtectedRoute exact path="/draft" component={DraftForm} />
-          <Route path="/DraftAnArticle" render={props => <DraftForm {...props}/>}/>
-          <Route exact path="/Step/:id" render={props => <Step {...props} steps={steps} setSteps={setSteps}/>}/>
+          <Route
+            path="/DraftAnArticle"
+            render={props => <DraftForm {...props} />}
+          />
+          <Route
+            exact
+            path="/Step/:id"
+            render={props => (
+              <Step {...props} steps={steps} setSteps={setSteps} />
+            )}
+          />
         </Switch>
       </div>
     </Router>
-    
   );
 }
 
