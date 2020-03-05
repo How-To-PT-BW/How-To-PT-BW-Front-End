@@ -22,6 +22,7 @@ function App() {
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>
         <Link to="/DraftAnArticle">Create</Link>
+        <Link to="/articlelist">Articles</Link>
       </nav>
       <div>
         <Switch>
@@ -29,11 +30,12 @@ function App() {
           <Route exact path="/" component={Welcome} />
           <Route exact path="/articlelist" component={ArticleList} />
           <Route exact path="/signup" component={SignUpForm} />
-          <Route 
-          path="/how-to/:id"
-          render={props=>{
-            return <HowTo {...props}/>
-          }}/>
+          <Route
+            path="/how-to/:id"
+            render={props => {
+              return <HowTo {...props} />;
+            }}
+          />
           <ProtectedRoute exact path="/draft" component={DraftForm} />
           <Route
             path="/DraftAnArticle"
