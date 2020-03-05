@@ -62,7 +62,7 @@
 
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import { axiosWithAuth } from '../utilities/axiosWithAuth';
 
 
 const DraftForm = (props) => {
@@ -70,14 +70,17 @@ const DraftForm = (props) => {
     const id = Number(1)
 
     const submit = (data) => {
-        data.instructions = []
+        data.user_id = 3
+        data.topic = "food"
         console.log(data)
         setValue('title','')
         setValue('problem','')
         setValue('solution','')
-        axios.post("/how-to", {data})
+        axiosWithAuth()
+            .post("/how-to", data)
             .then(response => {
                 console.log(response)
+                props.sethowtoid(response.data.id)
             })
             .catch(error => {
                 console.log(error)

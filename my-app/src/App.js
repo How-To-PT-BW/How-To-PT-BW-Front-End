@@ -15,6 +15,7 @@ import Welcome from './components/Welcome';
 
 function App() {
   const [steps,setSteps] = useState([])
+  const [howtoid,sethowtoid] = useState()
   return (
     
     
@@ -31,8 +32,8 @@ function App() {
           <Route exact path="/" component={Welcome} />
           <Route path="/signup" component={SignUpForm} />
           <ProtectedRoute exact path="/draft" component={DraftForm} />
-          <Route path="/DraftAnArticle" render={props => <DraftForm {...props}/>}/>
-          <Route exact path="/Step/:id" render={props => <Step {...props} steps={steps} setSteps={setSteps}/>}/>
+          <Route path="/DraftAnArticle" render={props => <DraftForm {...props} sethowtoid={sethowtoid}/>}/>
+          <Route exact path="/Step/:id" render={props => <Step {...props} steps={steps} setSteps={setSteps} howtoid={howtoid}/>}/>
         </Switch>
       </div>
     </Router>

@@ -38,6 +38,7 @@ const Step = (props) => {
     const id = Number(props.match.params.id) 
     const submit = (data) => {
         data.step_number = id - 1
+        data.how_to_id = props.howtoid
         console.log(data)
         props.setSteps([...steps,data])
         console.log(steps)
