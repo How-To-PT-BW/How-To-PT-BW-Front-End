@@ -8,35 +8,45 @@ import DraftForm from './components/DraftAnArticle';
 import TopBarBlock from './styledComponents/topbarblock';
 import Step from './components/Step';
 import Welcome from './components/Welcome';
+import ArticleList from './components/ArticleList';
+import HowTo from './components/HowTo'
 
-
-
-// staging
+// staging test
 
 function App() {
   const [howtoid,sethowtoid] = useState()
   return (
-    
-    
     <Router>
-      <TopBarBlock/>
+      <TopBarBlock />
       <nav>
+        <Link to="/">Home</Link>
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>
         <Link to="/DraftAnArticle">Create</Link>
+        <Link to="/articlelist">Articles</Link>
       </nav>
       <div>
         <Switch>
           <Route path="/login" component={LoginForm} />
           <Route exact path="/" component={Welcome} />
-          <Route path="/signup" component={SignUpForm} />
-          {/* <ProtectedRoute exact path="/draft" component={DraftForm} /> */}
+
+          
+
+          <Route exact path="/articlelist" component={ArticleList} />
+          <Route exact path="/signup" component={SignUpForm} />
+          <Route
+            path="/how-to/:id"
+            render={props => {
+              return <HowTo {...props} />;
+            }}
+          />
+
+          
           <Route path="/DraftAnArticle" render={props => <DraftForm {...props} sethowtoid={sethowtoid}/>}/>
           <Route exact path="/Step/:id" render={props => <Step {...props} howtoid={howtoid}/>}/>
         </Switch>
       </div>
     </Router>
-    
   );
 }
 
