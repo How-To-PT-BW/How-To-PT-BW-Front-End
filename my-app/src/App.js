@@ -11,7 +11,7 @@ import Welcome from './components/Welcome';
 import ArticleList from './components/ArticleList';
 import HowTo from './components/HowTo'
 
-// staging
+// staging test
 
 function App() {
   const [steps,setSteps] = useState([])
@@ -20,6 +20,7 @@ function App() {
     <Router>
       <TopBarBlock />
       <nav>
+        <Link to="/">Home</Link>
         <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>
         <Link to="/DraftAnArticle">Create</Link>
@@ -38,18 +39,8 @@ function App() {
             }}
           />
           <ProtectedRoute exact path="/draft" component={DraftForm} />
-          <Route
-            path="/DraftAnArticle"
-            render={props => <DraftForm {...props} />}
-          />
-          <Route
-            exact
-            path="/Step/:id"
-            render={props => (
-              <Step {...props} steps={steps} setSteps={setSteps} />
-            )}
-          />
-
+          <Route path="/DraftAnArticle" render={props => <DraftForm {...props} sethowtoid={sethowtoid}/>}/>
+          <Route exact path="/Step/:id" render={props => <Step {...props} steps={steps} setSteps={setSteps} howtoid={howtoid}/>}/>
         </Switch>
       </div>
     </Router>

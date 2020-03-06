@@ -3,29 +3,8 @@ import axios from "axios";
 import styled from "styled-components";
 import { colors, devices } from "../styledComponents/variables";
 import { useForm } from "react-hook-form";
+import {axiosWithAuth} from '../utilities/axiosWithAuth';
 
-function HowTo(props) {
-    const [article, setArticle] = useState({});
-    const [isLoading, setIsLoading] = useState(true);
-    const [editing, setEditing] = useState(false);
-    const editArticle = article =>{
-        setEditing(true);
-    };
-const { register, handleSubmit, watch, errors } = useForm();
-const onSubmit = data => {
-  console.log(data);
-//   axiosWithAuth()
-//     .post("/users/login", data)
-//     .then(res => {
-//       console.log(res);
-//       localStorage.setItem("token", res.data.token);
-//       props.history.push("/draft");
-//     })
-//     .catch(err => {
-//       localStorage.removeItem("token");
-//       console.log("There was an error", err);
-//     });
-};
 const FormSubmit = styled.input`
   background-color: ${colors.primary};
   padding: 0px 25px;
@@ -38,6 +17,48 @@ const FormSubmit = styled.input`
   width: 163px;
   height: 48px;
 `;
+
+
+function HowTo(props) {
+    const [article, setArticle] = useState({});
+    const [newArticle, setNewArticle] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+    const [editing, setEditing] = useState(false);
+    const editArticle = article =>{
+        setEditing(true);
+    };
+    const [didEdit, setDidEdit] = useState(false);
+
+
+    const { register, handleSubmit, watch, errors } = useForm();
+
+    const deleteArticle = () =>{
+        axiosWithAuth()
+        .delete(`/how-to/${article.id}`)
+        .then(res=>{
+            console.log(res);
+            props.history.push("/articlelist");
+        })
+        .catch(err=>{
+            console.log("Error!", err);
+        })
+    };
+    const onSubmit = data => {
+        console.log(data);
+        console.log(article.id);
+        axiosWithAuth()
+            .put(`/how-to/${article.id}`, data)
+            .then(res => {
+            console.log(res);
+            setEditing(false);
+            setDidEdit(!didEdit);
+            props.history.push(`/how-to/${article.id}`);
+            })
+            .catch(err => {
+            console.log("There was an error", err);
+            });
+};
+
     useEffect(function getArticle() {
       axios
         .get(`https://how-to-lifehack.herokuapp.com/how-to/${props.match.params.id}`)
@@ -49,8 +70,7 @@ const FormSubmit = styled.input`
         .catch(err => {
           console.log(err);
         });
-    }, []);
-    console.log(props);
+    }, [didEdit]);
     
 
     return (
@@ -58,13 +78,14 @@ const FormSubmit = styled.input`
         <h1>{article.title}</h1>
         <h1>{article.problem}</h1>
         <button onClick={editArticle}>Edit</button>
+        <button onClick={deleteArticle}>Delete</button>
         {editing && (
           <form onSubmit={handleSubmit(onSubmit)}>
             <legend>edit article</legend>
             <label>
               title
               <input
-                value={article.title}
+                defaultValue={article.title}
                 name="title"
                 type="text"
                 ref={register}
@@ -73,8 +94,26 @@ const FormSubmit = styled.input`
             <label>
               problem
               <input
-                value={article.problem}
+                defaultValue={article.problem}
                 name="problem"
+                type="text"
+                ref={register}
+              />
+            </label>
+            <label>
+              solution
+              <input
+                defaultValue={article.solution}
+                name="solution"
+                type="text"
+                ref={register}
+              />
+            </label>
+            <label>
+              topic
+              <input
+                defaultValue={article.topic}
+                name="topic"
                 type="text"
                 ref={register}
               />
