@@ -59,7 +59,7 @@ function HowTo(props) {
             console.log("There was an error", err);
             });
 };
-
+//comment
     useEffect(function getArticle() {
       axios
         .get(`https://how-to-lifehack.herokuapp.com/how-to/${props.match.params.id}`)
