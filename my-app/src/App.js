@@ -14,7 +14,6 @@ import HowTo from './components/HowTo'
 // staging test
 
 function App() {
-  const [steps,setSteps] = useState([])
   const [howtoid,sethowtoid] = useState()
   return (
     <Router>
@@ -30,6 +29,9 @@ function App() {
         <Switch>
           <Route path="/login" component={LoginForm} />
           <Route exact path="/" component={Welcome} />
+
+          
+
           <Route exact path="/articlelist" component={ArticleList} />
           <Route exact path="/signup" component={SignUpForm} />
           <Route
@@ -38,9 +40,10 @@ function App() {
               return <HowTo {...props} />;
             }}
           />
-          <ProtectedRoute exact path="/draft" component={DraftForm} />
+
+          
           <Route path="/DraftAnArticle" render={props => <DraftForm {...props} sethowtoid={sethowtoid}/>}/>
-          <Route exact path="/Step/:id" render={props => <Step {...props} steps={steps} setSteps={setSteps} howtoid={howtoid}/>}/>
+          <Route exact path="/Step/:id" render={props => <Step {...props} howtoid={howtoid}/>}/>
         </Switch>
       </div>
     </Router>

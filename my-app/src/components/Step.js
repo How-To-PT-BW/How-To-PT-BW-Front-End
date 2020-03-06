@@ -30,19 +30,28 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import { axiosWithAuth } from '../utilities/axiosWithAuth';
 
 
 const Step = (props) => {
-    const steps = props.steps
+    console.log(props)
+    
     const { register, handleSubmit, setValue, errors } = useForm()
     const id = Number(props.match.params.id) 
     const submit = (data) => {
         data.step_number = id - 1
         data.how_to_id = props.howtoid
         console.log(data)
-        props.setSteps([...steps,data])
-        console.log(steps)
-        setValue('title','')
+        axiosWithAuth()
+            .post('how-to/instructions',data)
+            .then(Response => {
+                console.log(Response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+        setValue('step_title','')
         setValue('description','')
         
         
@@ -60,7 +69,7 @@ const Step = (props) => {
         <div>
             <form onSubmit={handleSubmit(submit)}>
                 <label>title</label>
-                <input type='text' name='title' ref={register({required: "TITLE REQUIRED"})}></input>
+                <input type='text' name='step_title' ref={register({required: "TITLE REQUIRED"})}></input>
                 {errors.title && <p>{errors.title.message}</p>}
                 <label>description</label>
                 <input type='text' name='description' ref={register({required: "DESCRIPTION REQUIRED"})}></input>

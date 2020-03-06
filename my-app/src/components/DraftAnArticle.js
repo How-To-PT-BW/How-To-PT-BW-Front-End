@@ -68,6 +68,7 @@ import { axiosWithAuth } from '../utilities/axiosWithAuth';
 const DraftForm = (props) => {
     const { register, handleSubmit, setValue, errors } = useForm()
     const id = Number(1)
+    
 
     const submit = (data) => {
         data.user_id = 3
