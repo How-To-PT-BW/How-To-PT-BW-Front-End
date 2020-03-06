@@ -82,6 +82,7 @@ const DraftForm = (props) => {
             .then(response => {
                 console.log(response)
                 props.sethowtoid(response.data.id)
+                props.history.push(`/Step/${id}`)
             })
             .catch(error => {
                 console.log(error)
@@ -93,16 +94,17 @@ const DraftForm = (props) => {
         <div>
             <form onSubmit={handleSubmit(submit)}>
                 <label>title</label>
-                <input type='text' placeholder='title' name='title' ref={register({required: "TITLE REQUIRED"})}></input>
-                {errors.title && <p>{errors.title.message}</p>}
+                <input type='text' placeholder='title' name='title' ref={register({required: true })}></input>
+                {errors.title && <p>TITLE REQUIRED</p>}
                 <label>problem</label>
-                <input type='text' placeholder='problem' name='problem' ref={register({required: "PROBLEM REQUIRED"})}></input>
-                {errors.problem && <p>{errors.problem.message}</p>}
+                <input type='text' placeholder='problem' name='problem' ref={register({required: true})}></input>
+                {errors.problem && <p>PROBLEM REQUIRED</p>}
                 <label>solution</label>
-                <input type='text' placeholder='solution' name='solution' ref={register({required: "SOLUTION REQUIRED"})}></input>
-                {errors.solution && <p>{errors.solution.message}</p>}
-                <button onClick={() => props.history.push(`/Step/${id}`)}>next step</button>
-                <button>save draft</button>
+                <input type='text' placeholder='solution' name='solution' ref={register({required: true})}></input>
+                {errors.solution && <p>SOLUTION REQUIRED</p>}
+                <button type='submit'>next step</button>
+                <button type='submit'>save draft</button>
+                
             </form>
             
         </div>
