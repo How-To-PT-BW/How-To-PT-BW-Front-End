@@ -21,6 +21,7 @@ const FormSubmit = styled.input`
 
 function HowTo(props) {
     const [article, setArticle] = useState({});
+    const [articleInstructions, setArticleInstructions] = useState([]);
     const [newArticle, setNewArticle] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [editing, setEditing] = useState(false);
@@ -65,18 +66,27 @@ function HowTo(props) {
         .then(res => {
           console.log(res);
           setArticle(res.data);
+          setArticleInstructions(res.data.instructions);
           setIsLoading(false);
         })
         .catch(err => {
           console.log(err);
         });
     }, [didEdit]);
-    
+    console.log("This is article:",articleInstructions)
 
     return (
       <div>
         <h1>{article.title}</h1>
         <h1>{article.problem}</h1>
+        {articleInstructions.map(instruction=>{
+            return(
+                <div>
+                <h3>{instruction.step_title}</h3>
+                <p>{instruction.description}</p>
+                </div>
+            )
+        })}
         <button onClick={editArticle}>Edit</button>
         <button onClick={deleteArticle}>Delete</button>
         {editing && (
