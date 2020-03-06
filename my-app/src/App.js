@@ -15,6 +15,7 @@ import HowTo from './components/HowTo'
 
 function App() {
   const [steps,setSteps] = useState([])
+  const [howtoid,sethowtoid] = useState()
   return (
     <Router>
       <TopBarBlock />
@@ -48,6 +49,7 @@ function App() {
               <Step {...props} steps={steps} setSteps={setSteps} />
             )}
           />
+
         </Switch>
       </div>
     </Router>
