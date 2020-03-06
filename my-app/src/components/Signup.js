@@ -133,8 +133,12 @@ function SignUpForm(props) {
           <FormInput
             name="password"
             type="password"
-            ref={register({ required: true, maxLength: 10 })}
+            ref={register({
+              required: true,
+              maxLength: 10,
+            })}
           />
+          {errors.password && <span>This field is required</span>}
         </FormInputGroup>
         <FormLabel>Account Type</FormLabel>
 
