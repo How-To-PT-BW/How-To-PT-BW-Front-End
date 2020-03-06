@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import { colors, devices } from "../styledComponents/variables";
 import { useForm } from "react-hook-form";
+import {axiosWithAuth} from '../utilities/axiosWithAuth';
 
 const FormSubmit = styled.input`
   background-color: ${colors.primary};
@@ -26,31 +27,24 @@ function HowTo(props) {
     const editArticle = article =>{
         setEditing(true);
     };
-
-    const handleChange = e =>{
-        setNewArticle({
-            newArticle:{
-                ...newArticle,
-                [e.target.name]: e.target.value
-            }
-        });
-    };
+    const [didEdit, setDidEdit] = useState(false);
 
 
     const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
-  console.log(data);
-//   axiosWithAuth()
-//     .post("/users/login", data)
-//     .then(res => {
-//       console.log(res);
-//       localStorage.setItem("token", res.data.token);
-//       props.history.push("/draft");
-//     })
-//     .catch(err => {
-//       localStorage.removeItem("token");
-//       console.log("There was an error", err);
-//     });
+        console.log(data);
+        console.log(article.id);
+        axiosWithAuth()
+            .put(`/how-to/${article.id}`, data)
+            .then(res => {
+            console.log(res);
+            setEditing(false);
+            setDidEdit(!didEdit);
+            props.history.push(`/how-to/${article.id}`);
+            })
+            .catch(err => {
+            console.log("There was an error", err);
+            });
 };
 
     useEffect(function getArticle() {
@@ -64,7 +58,7 @@ function HowTo(props) {
         .catch(err => {
           console.log(err);
         });
-    }, []);
+    }, [didEdit]);
     
 
     return (
@@ -89,6 +83,24 @@ function HowTo(props) {
               <input
                 defaultValue={article.problem}
                 name="problem"
+                type="text"
+                ref={register}
+              />
+            </label>
+            <label>
+              solution
+              <input
+                defaultValue={article.solution}
+                name="solution"
+                type="text"
+                ref={register}
+              />
+            </label>
+            <label>
+              topic
+              <input
+                defaultValue={article.topic}
+                name="topic"
                 type="text"
                 ref={register}
               />
