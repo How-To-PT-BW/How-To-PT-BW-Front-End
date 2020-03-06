@@ -31,6 +31,18 @@ function HowTo(props) {
 
 
     const { register, handleSubmit, watch, errors } = useForm();
+
+    const deleteArticle = () =>{
+        axiosWithAuth()
+        .delete(`/how-to/${article.id}`)
+        .then(res=>{
+            console.log(res);
+            props.history.push("/articlelist");
+        })
+        .catch(err=>{
+            console.log("Error!", err);
+        })
+    };
     const onSubmit = data => {
         console.log(data);
         console.log(article.id);
@@ -66,6 +78,7 @@ function HowTo(props) {
         <h1>{article.title}</h1>
         <h1>{article.problem}</h1>
         <button onClick={editArticle}>Edit</button>
+        <button onClick={deleteArticle}>Delete</button>
         {editing && (
           <form onSubmit={handleSubmit(onSubmit)}>
             <legend>edit article</legend>
