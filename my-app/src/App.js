@@ -14,7 +14,6 @@ import Welcome from './components/Welcome';
 // staging
 
 function App() {
-  const [steps,setSteps] = useState([])
   const [howtoid,sethowtoid] = useState()
   return (
     
@@ -31,9 +30,9 @@ function App() {
           <Route path="/login" component={LoginForm} />
           <Route exact path="/" component={Welcome} />
           <Route path="/signup" component={SignUpForm} />
-          <ProtectedRoute exact path="/draft" component={DraftForm} />
+          {/* <ProtectedRoute exact path="/draft" component={DraftForm} /> */}
           <Route path="/DraftAnArticle" render={props => <DraftForm {...props} sethowtoid={sethowtoid}/>}/>
-          <Route exact path="/Step/:id" render={props => <Step {...props} steps={steps} setSteps={setSteps} howtoid={howtoid}/>}/>
+          <Route exact path="/Step/:id" render={props => <Step {...props} howtoid={howtoid}/>}/>
         </Switch>
       </div>
     </Router>
