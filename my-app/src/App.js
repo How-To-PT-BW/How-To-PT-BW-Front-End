@@ -13,7 +13,6 @@ import ArticleList from './components/ArticleList';
 import HowTo from './components/HowTo';
 import {UserContext} from './utilities/userContext';
 import Logout from './components/Logout';
-
 import Topics from './components/Topics';
 import Topic from './components/Topic';
 import SearchResults from './components/SearchResults';
@@ -44,19 +43,26 @@ function App() {
         }
       }}
     >
-
       <Router>
         <TopBarBlock />
         <div>
           <Switch>
             <Route path="/login" component={LoginForm} />
             <Route exact path="/logout" component={Logout} />
-            <Route exact path="/" render={props => <Welcome {...props}/>} />
-            <Route exact path="/Topics" component={Topics}/>
-            <Route exact path="/Topics/:topic" render={props => <Topic {...props} />}/>
-            <Route exact path="/articlelist" component={ArticleList} />
+            <Route exact path="/" render={props => <Welcome {...props} />} />
+            <Route exact path="/Topics" component={Topics} />
+            <Route
+              exact
+              path="/Topics/:topic"
+              render={props => <Topic {...props} />}
+            />
+            <ProtectedRoute exact path="/articlelist" component={ArticleList} />
             <Route exact path="/signup" component={SignUpForm} />
-            <Route exact path="/search/:input" render={props => <SearchResults {...props} /> }/>
+            <Route
+              exact
+              path="/search/:input"
+              render={props => <SearchResults {...props} />}
+            />
             <Route
               path="/how-to/:id"
               render={props => {
@@ -75,9 +81,8 @@ function App() {
             />
           </Switch>
         </div>
-        <FooterBarBlock/>
+        <FooterBarBlock />
       </Router>
-
     </UserContext.Provider>
   );
 }
