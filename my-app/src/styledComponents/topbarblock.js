@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
-
+import {UserContext} from '../utilities/userContext';
 const Topbarbackground = styled.div`
     background: #36827E;
     height: 100px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    align-items: center;
    
 
 `
@@ -26,10 +27,15 @@ const Topbartext = styled.h3`
     color: #F1F9F9;
 `
 
-const Topbarblock = () => {
+
+function Topbarblock() {
+    const user = useContext(UserContext);
+
     return (
         <Topbarbackground>
+            <div></div>
             <Topbartext>How-To</Topbartext>
+            <h3>Welcome {user.user}</h3>
         </Topbarbackground>
     );
 }

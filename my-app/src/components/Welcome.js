@@ -5,6 +5,8 @@ import { colors, devices } from "../styledComponents/variables";
 import {useForm} from 'react-hook-form';
 import {H2, H2White, FormLabel, FormRadioLabel, H3, H3White} from '../styledComponents/fontStyles';
 import DraftArticleLogo from '../images/DraftArticleLogo.png';
+import { Link } from "react-router-dom";
+import { Topics } from './Topics';
 
 const Container = styled.div`
   background-color: ${colors.background2};
@@ -54,6 +56,9 @@ const GetStartedButton = styled.button`
     font-size: 22px;
     font-family: 'Martel';
     font-weight: 400;
+    &:hover{
+        cursor: pointer;
+    }
 `
 const CreatorStudioContainer=styled.div`
     display: flex;
@@ -88,37 +93,45 @@ const SearchField = styled.input`
     margin-bottom: 52px;
 `
 
-function Welcome() {
+function Welcome(props) {
 
     const { register, handleSubmit, watch, errors } = useForm();
-    const onSubmit = data => {
-      console.log(data);
-    }; // your form submit function which will invoke after successful validation
 
-    return(
-        <Container>
-            <Header>
-                <H2>Welcome!</H2>
-                <H3>We can't wait to show you what you can do today.</H3>
-                <GetStartedButton>Let's Get Started ></GetStartedButton>
-            </Header>
-            <SearchContainer>
-                <H3White>Find Out How To...</H3White>
-                <Form onSubmit={handleSubmit(onSubmit)}>
-                <SearchField name="search" type="text"></SearchField>
-                </Form>
-            </SearchContainer>
-            <CreatorStudioContainer>
-                <H2>Creator Studio</H2>
-                <H3>Do more with a How-To account!</H3>
-                <H3>Login or Sign Up Here</H3>
-            </CreatorStudioContainer>
-            <DraftArticleContainer>
-                <H2White>Draft an Article</H2White>
-                <H3White>Add to what makes How-To great!</H3White>
-            </DraftArticleContainer>
-        </Container>
-    )
+
+    const onSubmit = data => {
+      props.history.push(`/search/${data.search}`)
+    }; 
+
+    return (
+      <Container>
+        <Header>
+          <H2>Welcome!</H2>
+          <H3>We can't wait to show you what you can do today.</H3>
+          <Link to="/Topics">
+            <GetStartedButton>Let's Get Started ></GetStartedButton>
+          </Link>
+        </Header>
+        <SearchContainer>
+          <H3White>Find Out How To...</H3White>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <SearchField name="search" placeholder="search how-to by title" type="text" ref={register}></SearchField>
+            <button>search</button>
+          </Form>
+        </SearchContainer>
+        <CreatorStudioContainer>
+          <H2>Creator Studio</H2>
+          <H3>Do more with a How-To account!</H3>
+          <H3>
+            <Link to="/login">Login</Link> or <Link to="/signup">Sign Up</Link>{" "}
+            Here
+          </H3>
+        </CreatorStudioContainer>
+        <DraftArticleContainer>
+          <H2White>Draft an Article</H2White>
+          <H3White>Add to what makes How-To great!</H3White>
+        </DraftArticleContainer>
+      </Container>
+    );
 
 }
 

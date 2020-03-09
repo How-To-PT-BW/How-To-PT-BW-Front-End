@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import ReactDOM from 'react-dom';
 import styled from "styled-components";
 import { colors, devices } from "../styledComponents/variables";
@@ -7,6 +7,7 @@ import {H2, FormLabel} from '../styledComponents/fontStyles';
 import DraftArticleLogo from '../images/DraftArticleLogo.png';
 import axios from 'axios';
 import {axiosWithAuth} from '../utilities/axiosWithAuth';
+import { UserContext } from '../utilities/userContext';
 
 const Container = styled.div`
   background-color: ${colors.background3};
@@ -71,7 +72,8 @@ align-items:center;
 
 
 function LoginForm(props) {
-
+  const user=useContext(UserContext)
+  console.log(user)
   const { register, handleSubmit, watch, errors } = useForm();
     const onSubmit = data => {
       console.log(data);
@@ -80,7 +82,8 @@ function LoginForm(props) {
         .then(res => {
           console.log(res);
           localStorage.setItem("token", res.data.token);
-          props.history.push("/draft");
+          props.history.push("/");
+          user.updateUser(res.data.username)
         })
         .catch(err => {
           localStorage.removeItem("token");

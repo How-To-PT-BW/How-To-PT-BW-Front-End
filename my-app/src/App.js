@@ -9,44 +9,71 @@ import TopBarBlock from './styledComponents/topbarblock';
 import Step from './components/Step';
 import Welcome from './components/Welcome';
 import ArticleList from './components/ArticleList';
-import HowTo from './components/HowTo'
+import HowTo from './components/HowTo';
+import {UserContext} from './utilities/userContext';
+import Logout from './components/Logout';
+import Topics from './components/Topics';
+import Topic from './components/Topic';
+import SearchResults from './components/SearchResults';
+import FooterBarBlock from './styledComponents/FooterBarblock';
+
 
 // staging test
 
 function App() {
   const [howtoid,sethowtoid] = useState()
+  const [user, setUser] = useState("Please Log In!");
+  console.log("This is user:",user)
   return (
-    <Router>
-      <TopBarBlock />
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Sign Up</Link>
-        <Link to="/DraftAnArticle">Create</Link>
-        <Link to="/articlelist">Articles</Link>
-      </nav>
-      <div>
-        <Switch>
-          <Route path="/login" component={LoginForm} />
-          <Route exact path="/" component={Welcome} />
+    <UserContext.Provider
+      value={{
+        user,
+        updateUser: newUser => {
+          setUser(newUser);
+        }
+      }}
+    >
+      <Router>
+        <TopBarBlock />
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Sign Up</Link>
+          <Link to="/DraftAnArticle">Create</Link>
+          <Link to="/articlelist">Articles</Link>
+          <Link to="/logout">Logout</Link>
+        </nav>
+        <div>
+          <Switch>
+            <Route path="/login" component={LoginForm} />
+            <Route exact path="/logout" component={Logout} />
+            <Route exact path="/" render={props => <Welcome {...props}/>} />
+            <Route exact path="/Topics" component={Topics}/>
+            <Route exact path="/Topics/:topic" render={props => <Topic {...props} />}/>
+            <Route exact path="/articlelist" component={ArticleList} />
+            <Route exact path="/signup" component={SignUpForm} />
+            <Route exact path="/search/:input" render={props => <SearchResults {...props} /> }/>
+            <Route
+              path="/how-to/:id"
+              render={props => {
+                return <HowTo {...props} />;
+              }}
+            />
 
-          
-
-          <Route exact path="/articlelist" component={ArticleList} />
-          <Route exact path="/signup" component={SignUpForm} />
-          <Route
-            path="/how-to/:id"
-            render={props => {
-              return <HowTo {...props} />;
-            }}
-          />
-
-          
-          <Route path="/DraftAnArticle" render={props => <DraftForm {...props} sethowtoid={sethowtoid}/>}/>
-          <Route exact path="/Step/:id" render={props => <Step {...props} howtoid={howtoid}/>}/>
-        </Switch>
-      </div>
-    </Router>
+            <Route
+              path="/DraftAnArticle"
+              render={props => <DraftForm {...props} sethowtoid={sethowtoid} />}
+            />
+            <Route
+              exact
+              path="/Step/:id"
+              render={props => <Step {...props} howtoid={howtoid} />}
+            />
+          </Switch>
+        </div>
+        <FooterBarBlock/>
+      </Router>
+    </UserContext.Provider>
   );
 }
 
