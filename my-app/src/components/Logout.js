@@ -6,6 +6,7 @@ function Logout(props){
     localStorage.removeItem("token")
     props.history.push('/login')
     user.updateUser("Please Log In!");
+    user.updateLoggedIn(false);
     return(
     <div></div>
     )}
