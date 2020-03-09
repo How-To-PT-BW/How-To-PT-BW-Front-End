@@ -6,6 +6,7 @@ import {useForm} from 'react-hook-form';
 import {H2, H2White, FormLabel, FormRadioLabel, H3, H3White} from '../styledComponents/fontStyles';
 import DraftArticleLogo from '../images/DraftArticleLogo.png';
 import { Link } from "react-router-dom";
+import { Topics } from './Topics';
 
 const Container = styled.div`
   background-color: ${colors.background2};
@@ -92,26 +93,29 @@ const SearchField = styled.input`
     margin-bottom: 52px;
 `
 
-function Welcome() {
+function Welcome(props) {
 
     const { register, handleSubmit, watch, errors } = useForm();
+
+
     const onSubmit = data => {
-      console.log(data);
-    }; // your form submit function which will invoke after successful validation
+      props.history.push(`/search/${data.search}`)
+    }; 
 
     return (
       <Container>
         <Header>
           <H2>Welcome!</H2>
           <H3>We can't wait to show you what you can do today.</H3>
-          <Link to="DraftAnArticle">
+          <Link to="/Topics">
             <GetStartedButton>Let's Get Started ></GetStartedButton>
           </Link>
         </Header>
         <SearchContainer>
           <H3White>Find Out How To...</H3White>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <SearchField name="search" type="text"></SearchField>
+            <SearchField name="search" placeholder="search how-to by title" type="text" ref={register}></SearchField>
+            <button>search</button>
           </Form>
         </SearchContainer>
         <CreatorStudioContainer>
