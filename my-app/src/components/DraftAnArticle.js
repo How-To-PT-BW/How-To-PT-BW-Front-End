@@ -73,10 +73,10 @@ export const DraftHeader = styled.div`
 export const Container = styled.div`
   background-color: ${colors.background3};
   fill: solid ${colors.background3};
-  border: 1px solid red;
   display: flex;
   flex-direction:column;
   align-items: center;
+  margin: auto;
 
   @media ${devices.mobile} {
     max-width: 500px;
@@ -85,7 +85,7 @@ export const Container = styled.div`
     max-width: 800px;
   }
   @media ${devices.desktop} {
-    max-width: 1024px;
+    max-width: 100%;
   }
 `;
 

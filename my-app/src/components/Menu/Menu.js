@@ -2,20 +2,20 @@ import React, {useContext} from "react";
 import { StyledMenu } from "./Menu.styled";
 import { bool } from "prop-types";
 import {UserContext} from '../../utilities/userContext'
-
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 export const Menu = ({open}) => {
     const user = useContext(UserContext);
   return (
     <StyledMenu open={open}>
-      <a href="/">Home</a>
+      <Link to="/">Home</Link>
       {user.loggedIn ? (
-        <a href="/logout">Logout</a>
+        <Link to="/logout">Logout</Link>
       ) : (
-        <a href="/login">Login</a>
+        <Link to="/login">Login</Link>
       )}
-      <a href="/signup">Signup</a>
-      <a href="/DraftAnArticle">Create A How-To</a>
-      <a href="/articlelist">All Articles</a>
+      <Link to="/signup">Signup</Link>
+      <Link to="/DraftAnArticle">Create A How-To</Link>
+      <Link to="/articlelist">All Articles</Link>
     </StyledMenu>
   );
 };

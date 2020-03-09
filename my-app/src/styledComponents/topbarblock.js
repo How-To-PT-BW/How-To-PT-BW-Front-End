@@ -1,7 +1,9 @@
-import React, {useContext} from 'react';
+import React, { useContext, useRef, useState } from "react";
+import { useOnClickOutside } from "../hooks/hooks";
 import styled from 'styled-components';
 import {UserContext} from '../utilities/userContext';
 import {colors} from "./variables";
+import { Burger, Menu } from "../components/";
 const Topbarbackground = styled.div`
     background: ${colors.background5};
     height: 100px;
@@ -60,15 +62,20 @@ const LoginButton = styled.a`
 
 function Topbarblock() {
     const user = useContext(UserContext);
-
+    const node = useRef();
+    const [open, setOpen] = useState(false);
+    useOnClickOutside(node, () => setOpen(false));
     return (
       <Topbarbackground>
-        <div></div>
+        <div ref={node}>
+          <Burger open={open} setOpen={setOpen} />
+          <Menu open={open} setOpen={setOpen} />
+        </div>
         <Topbartext>How-To</Topbartext>
         {user.loggedIn ? (
           <UserText>Welcome {user.user}</UserText>
         ) : (
-            <LoginButton href="/login">Log In</LoginButton>
+          <LoginButton href="/login">Log In</LoginButton>
         )}
       </Topbarbackground>
     );

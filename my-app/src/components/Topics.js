@@ -12,12 +12,12 @@ import { colors, devices } from "../styledComponents/variables";
 const Container = styled.div`
  background-color: ${colors.background3};
   fill: solid ${colors.background3};
-  border: 1px solid red;
   display: flex;
   flex-direction:row;
   align-items: center;
   flex-wrap:wrap;
   justify-content:space-around;
+  margin: auto;
   
   
   
@@ -29,7 +29,7 @@ const Container = styled.div`
     max-width: 800px;
   }
   @media ${devices.desktop} {
-    max-width: 1024px;
+    max-width: 100%;
   }
 `
 
