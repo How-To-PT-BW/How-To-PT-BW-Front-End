@@ -84,6 +84,7 @@ function LoginForm(props) {
           localStorage.setItem("token", res.data.token);
           props.history.push("/");
           user.updateUser(res.data.username)
+          user.updateLoggedIn(true);
         })
         .catch(err => {
           localStorage.removeItem("token");
