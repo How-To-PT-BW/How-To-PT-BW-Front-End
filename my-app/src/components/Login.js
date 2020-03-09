@@ -12,7 +12,7 @@ import { UserContext } from '../utilities/userContext';
 const Container = styled.div`
   background-color: ${colors.background3};
   fill: solid ${colors.background3};
-
+  margin: auto;
   @media ${devices.mobile} {
     max-width: 500px;
   }
@@ -20,7 +20,7 @@ const Container = styled.div`
     max-width: 800px;
   }
   @media ${devices.desktop} {
-    max-width: 1024px;
+    max-width: 100%;
   }
 `;
 

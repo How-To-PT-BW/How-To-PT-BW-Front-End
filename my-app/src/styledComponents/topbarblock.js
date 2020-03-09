@@ -41,6 +41,22 @@ const UserText = styled.h4`
   color: ${colors.background2};
 `;
 
+const LoginButton = styled.a`
+  background: ${colors.primary};
+  color: white;
+  margin-left: 10px;
+  padding: 5px 15px;
+  border-radius: 25px;
+  font-family: Martel;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 32px;
+
+  text-align: center;
+  letter-spacing: 0.01px;
+`;
+
 
 function Topbarblock() {
     const user = useContext(UserContext);
@@ -52,9 +68,7 @@ function Topbarblock() {
         {user.loggedIn ? (
           <UserText>Welcome {user.user}</UserText>
         ) : (
-          <UserText>
-            Please <a href="/login">Log In</a>
-          </UserText>
+            <LoginButton href="/login">Log In</LoginButton>
         )}
       </Topbarbackground>
     );

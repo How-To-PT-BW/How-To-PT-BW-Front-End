@@ -19,7 +19,7 @@ const Container = styled.div`
     max-width: 800px;
   }
   @media ${devices.desktop} {
-    max-width: 1024px;
+    max-width: 100%;
   }
 `;
 
