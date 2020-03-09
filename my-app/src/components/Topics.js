@@ -12,7 +12,7 @@ import { colors, devices } from "../styledComponents/variables";
 const Container = styled.div`
  background-color: ${colors.background3};
   fill: solid ${colors.background3};
-  border: 1px solid red;
+  
   display: flex;
   flex-direction:row;
   align-items: center;
@@ -33,7 +33,7 @@ const Container = styled.div`
   }
 `
 
-const Topic = styled.div`
+export const Topic = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -44,9 +44,16 @@ const Img = styled.img`
     height: 250px;
     
 `
-const H3 = styled.h3`
+export const H3 = styled.h3`
     font-family: "Martel";
     font-size: 22px;
+    font-weight: 400;
+    color: ${colors.text5};
+`;
+
+export const H1 = styled.h1`
+    font-family: "Martel";
+    font-size: 35px;
     font-weight: 400;
     color: ${colors.text5};
 `;
@@ -56,15 +63,16 @@ const Topics = () => {
         <div>
             {/* <h2>topics</h2> */}
             <Container>
-            {/* <h2>topics</h2> */}
-            <Link to='/topics/food'><Topic><H3>food</H3><Img src={food}/></Topic></Link>
-            <Link to='/topics/hobbies and crafts'><Topic><H3>hobbies and crafts</H3><Img src={hobbies}/></Topic></Link>
-            <Link to='/topics/home and garden'><Topic><H3>home and garden</H3><Img src={homeandgarden}/></Topic></Link>
-            <Link to='/topics/travel'><Topic><H3>travel</H3><Img src={travel}/></Topic></Link>
-            <Link to='/topics/computers and tech'><Topic><H3>computers and tech</H3><Img src={computers}/></Topic></Link>
-            <Link to='/topics/auto'><Topic><H3>auto</H3><Img src={auto}/></Topic></Link>
-            
-        </Container>
+                <H1>topics</H1>
+                <Container>
+                    <Link to='/topics/food'><Topic><H3>food</H3><Img src={food}/></Topic></Link>
+                    <Link to='/topics/hobbies and crafts'><Topic><H3>hobbies and crafts</H3><Img src={hobbies}/></Topic></Link>
+                    <Link to='/topics/home and garden'><Topic><H3>home and garden</H3><Img src={homeandgarden}/></Topic></Link>
+                    <Link to='/topics/travel'><Topic><H3>travel</H3><Img src={travel}/></Topic></Link>
+                    <Link to='/topics/computers and tech'><Topic><H3>computers and tech</H3><Img src={computers}/></Topic></Link>
+                    <Link to='/topics/auto'><Topic><H3>auto</H3><Img src={auto}/></Topic></Link>
+                </Container> 
+            </Container>
         </div>
         
     );

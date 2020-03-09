@@ -73,7 +73,7 @@ export const DraftHeader = styled.div`
 export const Container = styled.div`
   background-color: ${colors.background3};
   fill: solid ${colors.background3};
-  border: 1px solid red;
+
   display: flex;
   flex-direction:column;
   align-items: center;
