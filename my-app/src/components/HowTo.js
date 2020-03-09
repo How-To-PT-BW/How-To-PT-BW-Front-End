@@ -5,6 +5,25 @@ import { colors, devices } from "../styledComponents/variables";
 import { useForm } from "react-hook-form";
 import {axiosWithAuth} from '../utilities/axiosWithAuth';
 
+
+const Container = styled.div`
+  background-color: ${colors.background2};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: ${colors.text5};
+
+  @media ${devices.mobile} {
+    max-width: 500px;
+  }
+  @media ${devices.tablet} {
+    max-width: 800px;
+  }
+  @media ${devices.desktop} {
+    max-width: 100%;
+  }
+`;
+
 const FormSubmit = styled.input`
   background-color: ${colors.primary};
   padding: 0px 25px;
@@ -17,6 +36,131 @@ const FormSubmit = styled.input`
   width: 163px;
   height: 48px;
 `;
+
+const FormEdit = styled.button`
+  background-color: ${colors.primary};
+  padding: 0px 25px;
+  border: none;
+  border-radius: 36.5px;
+  font-size: 28px;
+  font-family: "Martel";
+  font-weight: 700;
+  color: white;
+  width: 163px;
+  height: 48px;
+`;
+
+const FormDelete = styled.button`
+  background-color: ${colors.primary};
+  padding: 0px 25px;
+  border: none;
+  border-radius: 36.5px;
+  font-size: 28px;
+  font-family: "Martel";
+  font-weight: 700;
+  color: white;
+  width: 163px;
+  height: 48px;
+`;
+
+const FormCancel = styled.button`
+  background-color: ${colors.primary};
+  padding: 0px 25px;
+  border: none;
+  border-radius: 36.5px;
+  font-size: 28px;
+  font-family: "Martel";
+  font-weight: 700;
+  color: white;
+  width: 163px;
+  height: 48px;
+`;
+
+const ButtonRow = styled.div`
+    display: flex; 
+    justify-content: space-evenly;
+    width: 80%;
+    margin: 10px auto;
+`
+
+const Instructions = styled.div`
+display: flex;
+flex-direction: column;
+text-align:center;
+align-items: center;
+width: 80%;
+border-bottom: 1px dashed ${colors.background4};
+`
+const ArticleTitle = styled.h1`
+  margin-bottom: 0px;
+  margin-top: 0px;
+`;
+
+const ArticleProblem = styled.h2`
+  margin: 0px;
+  margin-bottom: 10px;
+  color: ${colors.text5};
+  font-weight: 400;
+`;
+
+const ArticleSolution = styled.h2`
+  margin: 10px 0px;
+  color: ${colors.text5};
+  font-weight: 400;
+`;
+
+const InstructionTitle = styled.h2`
+  margin: 0px;
+  margin-top: 10px;
+  color: ${colors.text5};
+  font-weight: 400;
+`;
+
+const InstructionDetail = styled.p`
+  margin-bottom:15px;
+
+  color: ${colors.text5};
+  font-weight: 400;
+`;
+
+const FormInput = styled.input`
+  width: 75%;
+  border: 2px solid ${colors.background4};
+  background-color: ${colors.background1};
+  text-align: center;
+  border-radius: 16px;
+  height: 48px;
+  font-size: 22px;
+  font-family: "Martel";
+  font-weight: 600;
+`;
+
+const FormInputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const FormLabel = styled.label`
+  font-family: "Martel";
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 600;
+  color: ${colors.text5};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+`;
+
+const FormContainer = styled.form`
+
+width: 100%;
+
+`
+
+
 
 
 function HowTo(props) {
@@ -76,65 +220,75 @@ function HowTo(props) {
     console.log("This is article:",articleInstructions)
 
     return (
-      <div>
-        <h1>{article.title}</h1>
-        <h1>{article.problem}</h1>
-        {articleInstructions.map(instruction=>{
-            return(
-                <div>
-                <h3>{instruction.step_title}</h3>
-                <p>{instruction.description}</p>
-                </div>
-            )
+      <Container>
+        <ArticleTitle>{article.title}</ArticleTitle>
+        <ArticleProblem>{article.problem}</ArticleProblem>
+        <ArticleSolution>{article.solution}</ArticleSolution>
+        {articleInstructions.map(instruction => {
+          return (
+            <Instructions>
+              <InstructionTitle>{instruction.step_title}</InstructionTitle>
+              <InstructionDetail>{instruction.description}</InstructionDetail>
+            </Instructions>
+          );
         })}
-        <button onClick={editArticle}>Edit</button>
-        <button onClick={deleteArticle}>Delete</button>
+        <ButtonRow>
+          <FormEdit onClick={editArticle}>Edit</FormEdit>
+          <FormDelete onClick={deleteArticle}>Delete</FormDelete>
+        </ButtonRow>
         {editing && (
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <legend>edit article</legend>
-            <label>
-              title
-              <input
-                defaultValue={article.title}
-                name="title"
-                type="text"
-                ref={register}
-              />
-            </label>
-            <label>
-              problem
-              <input
-                defaultValue={article.problem}
-                name="problem"
-                type="text"
-                ref={register}
-              />
-            </label>
-            <label>
-              solution
-              <input
-                defaultValue={article.solution}
-                name="solution"
-                type="text"
-                ref={register}
-              />
-            </label>
-            <label>
-              topic
-              <input
-                defaultValue={article.topic}
-                name="topic"
-                type="text"
-                ref={register}
-              />
-            </label>
-            <div className="button-row">
+          <FormContainer onSubmit={handleSubmit(onSubmit)}>
+            <FormInputGroup>
+              <FormLabel>
+                Title
+                <FormInput
+                  defaultValue={article.title}
+                  name="title"
+                  type="text"
+                  ref={register}
+                />
+              </FormLabel>
+            </FormInputGroup>
+            <FormInputGroup>
+              <FormLabel>
+                Problem
+                <FormInput
+                  defaultValue={article.problem}
+                  name="problem"
+                  type="text"
+                  ref={register}
+                />
+              </FormLabel>
+            </FormInputGroup>
+            <FormInputGroup>
+              <FormLabel>
+                Solution
+                <FormInput
+                  defaultValue={article.solution}
+                  name="solution"
+                  type="text"
+                  ref={register}
+                />
+              </FormLabel>
+            </FormInputGroup>
+            <FormInputGroup>
+              <FormLabel>
+                Topic
+                <FormInput
+                  defaultValue={article.topic}
+                  name="topic"
+                  type="text"
+                  ref={register}
+                />
+              </FormLabel>
+            </FormInputGroup>
+            <ButtonRow>
               <FormSubmit type="submit" value="Submit" />
-              <button onClick={() => setEditing(false)}>cancel</button>
-            </div>
-          </form>
+              <FormCancel onClick={() => setEditing(false)}>Cancel</FormCancel>
+            </ButtonRow>
+          </FormContainer>
         )}
-      </div>
+      </Container>
     );
 }
 
