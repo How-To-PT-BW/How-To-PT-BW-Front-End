@@ -1,6 +1,11 @@
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { H1 } from './Topics';
+import { H2 } from './Topic';
+import styled from 'styled-components';
+import { colors, devices } from "../styledComponents/variables";
+import { Container } from './DraftAnArticle';
 
 const SearchResults = (props) => {
 
@@ -19,16 +24,16 @@ const SearchResults = (props) => {
 
 
     return (
-        <div>
+        <Container>
            {data.map((article,i) => (
                 <Link to={`/how-to/${article.id}`} key={i}>
                   <div className="article" key={article.id}>
-                    <h1>{article.title}</h1>
-                    <h2>{article.problem}</h2>
+                    <H1>{article.title}</H1>
+                    <H2>{article.problem}</H2>
                   </div>
                 </Link>
               ))}   
-        </div>
+        </Container>
     );
 }
 
