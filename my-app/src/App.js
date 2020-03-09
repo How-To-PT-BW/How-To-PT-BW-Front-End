@@ -24,17 +24,12 @@ import { Burger, Menu } from "./components";
 
 //styling
 
-
-
 // staging test
 
 function App() {
-  const node = useRef();
-  useOnClickOutside(node, () => setOpen(false));
   const [howtoid,sethowtoid] = useState()
   const [user, setUser] = useState("Please Log In!");
   const [loggedIn, setLoggedIn] = useState(false);
-  const [open, setOpen] = useState(false);
   console.log("This is user:",user)
   return (
     <UserContext.Provider
@@ -52,18 +47,6 @@ function App() {
 
       <Router>
         <TopBarBlock />
-        <div ref={node}>
-            <Burger open={open} setOpen={setOpen} />
-            <Menu open={open} setOpen={setOpen} />
-          </div>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/DraftAnArticle">Create</Link>
-          <Link to="/articlelist">Articles</Link>
-          <Link to="/logout">Logout</Link>
-        </nav>
         <div>
           <Switch>
             <Route path="/login" component={LoginForm} />
