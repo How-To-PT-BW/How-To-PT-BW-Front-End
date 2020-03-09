@@ -1,4 +1,5 @@
-import React, { useState, Fragment }from 'react';
+import React, { useState, Fragment, useRef }from 'react';
+import { useOnClickOutside } from "./hooks/hooks"
 import './App.css';
 import LoginForm from './components/Login';
 import SignUpForm from './components/Signup';
@@ -12,29 +13,49 @@ import ArticleList from './components/ArticleList';
 import HowTo from './components/HowTo';
 import {UserContext} from './utilities/userContext';
 import Logout from './components/Logout';
+
 import Topics from './components/Topics';
 import Topic from './components/Topic';
 import SearchResults from './components/SearchResults';
 import FooterBarBlock from './styledComponents/FooterBarblock';
 
+import styled from "styled-components";
+import { Burger, Menu } from "./components";
+
+//styling
+
+
 
 // staging test
 
 function App() {
+  const node = useRef();
+  useOnClickOutside(node, () => setOpen(false));
   const [howtoid,sethowtoid] = useState()
   const [user, setUser] = useState("Please Log In!");
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [open, setOpen] = useState(false);
   console.log("This is user:",user)
   return (
     <UserContext.Provider
       value={{
         user,
+        loggedIn,
         updateUser: newUser => {
           setUser(newUser);
+        },
+        updateLoggedIn: newLogin => {
+          setLoggedIn(newLogin);
         }
       }}
     >
+
       <Router>
         <TopBarBlock />
+        <div ref={node}>
+            <Burger open={open} setOpen={setOpen} />
+            <Menu open={open} setOpen={setOpen} />
+          </div>
         <nav>
           <Link to="/">Home</Link>
           <Link to="/login">Login</Link>
@@ -73,6 +94,7 @@ function App() {
         </div>
         <FooterBarBlock/>
       </Router>
+
     </UserContext.Provider>
   );
 }
